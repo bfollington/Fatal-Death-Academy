@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="Base" tilewidth="32" tileheight="32">
+  <image source="tileset.png" width="640" height="360"/>
+ </tileset>
+ <layer name="Backgrounds" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt1EtOAkEQBuDZcQ+VK4gcAtzDHSBhi0JQD8DjwvwmLghkJiImNMy3+JJO+pHqSlV1qqrqULRBDOP1gjce4jGeolvAn9ruOXrxEv0z7v1HLbTBKMbydzXH82YS05+9WQHxtcmqOp03H/FZc/7rYF3XR9/+0kurAvJxyw77qMk83uI9FrEsIPZ7dNxHTfW9jk1sY1dA7AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwO/sAaAQIuQ=
+  </data>
+ </layer>
+ <layer name="Collidable" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt0zEKwCAMQNFevj1BNy8gnrJLh9BBxCIOeQ/+qASDxwEAZHXuHiCJ8naHykArtFA237evoTZYdE3OMXJ3BrXT6D56xf82cz6b1fv4Wzb2AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD7PUV/aak=
+  </data>
+ </layer>
+ <layer name="Foreground floors" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt09EKABAMBVB/z2fzKEnKeNA5tdTS0l1SAgB+k1uVSW9V4/3ot+RL838WlZkdxNn9P33m48kbMgcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4EQFa5sSfw==
+  </data>
+ </layer>
+ <layer name="Forefround walls" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt07ENwCAMBECWDjuQqdNA7SAsBNJd48Zy8S+XAgDADrXPZ3I/S0u+d7u3z5lcVjvRQezvf0RGVzJfI7+zZP0HAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABD7AFhyBm8=
+  </data>
+ </layer>
+</map>
