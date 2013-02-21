@@ -17,8 +17,8 @@ package
 		{
 			super(320, 240, 60, true);
 			FP.screen.scale = 2;
-			FP.console.enable();
-			FP.console.toggleKey = Key.TAB;
+			//FP.console.enable();
+			//FP.console.toggleKey = Key.TAB;
 			soundController = new SoundController();
 			
 		}
