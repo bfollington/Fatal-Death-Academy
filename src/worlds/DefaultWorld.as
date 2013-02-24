@@ -103,6 +103,10 @@ package worlds
 			e = new Entity(250, 10, t);
 			add(e);
 			
+			//If the level is level 1, display the instructional text
+			
+			
+			
 			//Create the fade in transition to begin a level
 			createTransition(true);
 		}

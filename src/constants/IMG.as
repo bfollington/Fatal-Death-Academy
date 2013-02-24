@@ -35,6 +35,7 @@ package constants
 		[Embed(source = 'assets/intro3.png')] public static const INTRO3_IMAGE:Class;
 		[Embed(source = 'assets/intro4.png')] public static const INTRO4_IMAGE:Class;
 		[Embed(source = 'assets/intro5.png')] public static const INTRO5_IMAGE:Class;
+		[Embed(source = 'assets/mute.png')] public static const MUTE_IMAGE:Class;
 		
 		public static var tilesets:Array = [VISUAL_TILES, VISUAL_TILES_BLUE, VISUAL_TILES_GREEN, VISUAL_TILES_PINK, VISUAL_TILES_LBLUE, VISUAL_TILES_RED];
 		

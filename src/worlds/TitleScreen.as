@@ -40,6 +40,9 @@ package worlds
 			
 			
 			_logo = addGraphic(new Image(IMG.LOGO_IMAGE), 0, 320 / 2 - 288 / 2, -200);
+			
+			var muteButton:MuteButton = new MuteButton(5, 220);
+			add(muteButton);
 
 			var titleTween:VarTween = new VarTween();
 			titleTween.tween(_logo, "y", 50, 80, Ease.bounceOut);
