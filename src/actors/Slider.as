@@ -11,7 +11,7 @@ package actors
 	import net.flashpunk.utils.Key;
 	import net.flashpunk.Entity;
 	
-	public class Slider extends Entity
+	public class Slider extends ExtEntity
 	{
 		public function Slider(makex:uint, makey:uint, ticker:int=0)
 		{
@@ -39,27 +39,53 @@ package actors
 			//Get our physics
 			super.update();
 			
-			_ticker++;
-			x += _xspeed;
-			
-			if (_ticker > 150) 
+			if (!_paused)
 			{
-				_xspeed *= -1;
-				_ticker = 0;
-			}
+				_ticker++;
+				x += _xspeed;
 			
-			if (_xspeed > 0) 
-			{
-				_sprMap.play("right");
-			} else {
-				_sprMap.play("left");
+				if (_ticker > 150) 
+				{
+					_xspeed *= -1;
+					_ticker = 0;
+				}
+				
+				if (_xspeed > 0) 
+				{
+					_sprMap.play("right");
+				} else {
+					_sprMap.play("left");
+				}
 			}
 
+		}
+		
+		override public function send_message(msg:String, params:Object=null):void
+		{
+			trace("got message");
+			
+			if (msg == "pause")
+			{
+				_sprMap.frame = _sprMap.frame;
+				_paused = true;
+			}
+			
+			if (msg == "unpause")
+			{
+				_paused = false;
+				if (_xspeed > 0) 
+				{
+					_sprMap.play("right");
+				} else {
+					_sprMap.play("left");
+				}
+			}
 		}
 		
 		private var _ticker:Number = 0;
 		private var _sprMap:Spritemap = null;
 		private var _xspeed:Number = 1.5;
+		private var _paused:Boolean;
 		
 	}
 }

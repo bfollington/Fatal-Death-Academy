@@ -197,6 +197,22 @@ package actors
 			
 		}
 		
+		override public function send_message(msg:String, params:Object=null):void
+		{
+			super.send_message(msg, params);
+			
+			if (msg == "pause")
+			{
+				_playerSpriteMap.frame = _playerSpriteMap.frame;
+			}
+			
+			if (msg == "unpause")
+			{
+				_playerSpriteMap.play("run");
+			}
+			
+		}
+		
 		public function resetLevel(fadein:Boolean):void
 		{
 			//Create the transition effect

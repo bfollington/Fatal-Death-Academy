@@ -9,9 +9,9 @@ package actors
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Spritemap;
 	
-	public class Stabber extends Entity
+	public class Stabber extends ExtEntity
 	{
-		public function Stabber(x:Number=0, y:Number=0, dir:Number=CONST.TOP)
+		public function Stabber(x:Number=0, y:Number=0, dir:Number=2)
 		{
 			
 			var mx:int = 0;
@@ -57,8 +57,26 @@ package actors
 			if ((_sprMap.frame >= 8) && (_sprMap.frame <= 20)) type = "none";
 			if ((_sprMap.frame >= 20) && (_sprMap.frame <= 22 )) type = "kill";
 		}
+		
+		override public function send_message(msg:String, params:Object=null):void
+		{
+			trace("got message");
+			
+			if (msg == "pause")
+			{
+				_sprMap.frame = _sprMap.frame;
+				_paused = true;
+			}
+			
+			if (msg == "unpause")
+			{
+				_paused = false;
+				_sprMap.play("default");
+			}
+		}
 
 		private var _sprMap:Spritemap = null;
+		private var _paused:Boolean = false;
 		
 	}
 }

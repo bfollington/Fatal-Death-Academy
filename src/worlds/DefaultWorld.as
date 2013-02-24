@@ -11,6 +11,7 @@ package worlds
 	import net.flashpunk.World;
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.utils.Input;
+	import net.flashpunk.utils.Key;
 	
 	public class DefaultWorld extends WorldBase
 	{
@@ -30,6 +31,9 @@ package worlds
 		private var _lives:int;
 		public var cam:Camera;
 		private var _temptext:Vector.<Entity>;
+		private var paused:Boolean;
+		private var _tempList:Array;
+		private var _listOfPausableObjects:Array = [];
 		
 		public function DefaultWorld(Map:Class, level:int, lives:int, soundController:SoundController)
 		{
@@ -38,6 +42,8 @@ package worlds
 			_level = level;
 			_lives = lives;
 			sndCtrl = soundController;
+			
+			Input.define("P", Key.P);
 			
 		}
 		
@@ -89,19 +95,19 @@ package worlds
 			//Add the score display objects
 			Text.size = 16;
 			
-			var shadow:TextBox = new TextBox(11, 11, _lives, false);
+			var shadow:TextBox = new TextBox(11, 23, _lives, false);
 			add(shadow);
-			var lives:TextBox = new TextBox(10, 10, _lives, true);
+			var lives:TextBox = new TextBox(10, 22, _lives, true);
 			add(lives);
 			
 			var t:Text = new Text("Level "+(_level + 1).toString());
 			t.scrollX = t.scrollY = 0;
 			t.color = 0x000000;
-			var e:Entity = new Entity(251, 11, t);
+			var e:Entity = new Entity(251, 23, t);
 			add(e);
 			t = new Text("Level "+(_level + 1).toString());
 			t.scrollX = t.scrollY = 0;
-			e = new Entity(250, 10, t);
+			e = new Entity(250, 22, t);
 			add(e);
 			
 			//If the level is level 1, display the instructional text
@@ -109,6 +115,11 @@ package worlds
 			{
 				_temptext = createTextWithShadowRet("Press space to start the level, and to jump!", 180, 200, 8, true, _temptext);
 			}
+			
+			e = new PauseButton(5, 5);
+			add(e);
+			e = new MenuButton(285, 8, sndCtrl);
+			add(e);
 			
 			//Create the fade in transition to begin a level
 			createTransition(true);
@@ -139,6 +150,32 @@ package worlds
 			
 		}
 		
+		public function pause():void
+		{
+			paused = true;
+
+			sendMessageToList("pause", _listOfPausableObjects);
+			
+		}
+		
+		public function unpause():void
+		{
+			paused = false;
+			
+			sendMessageToList("unpause", _listOfPausableObjects);
+		}
+		
+		private function sendMessageToList(msg:String, list:Array, params:Object=null):void
+		{
+			if (list != null) 
+			{
+				for(var i:int=0; i < list.length; i++)
+				{
+					if (list[i] is ExtEntity) list[i].send_message(msg, params);
+				}
+			}
+		}
+		
 		public function loadObjects(objData:ObjectData):void
 		{
 			
@@ -161,6 +198,7 @@ package worlds
 					case CONST.PLAYER_START:
 						player = new Player(obj.m_iX, obj.m_iY, _map, _level, _lives, sndCtrl);			
 						add(player);
+						_listOfPausableObjects = _listOfPausableObjects.concat(player);
 						break;
 					
 					case CONST.TNT:
@@ -191,16 +229,19 @@ package worlds
 					case CONST.SLIDER:
 						slider = new Slider(obj.m_iX, obj.m_iY, obj.m_tProperties.GetPropertyAsInt("ticker"));
 						add(slider);
+						_listOfPausableObjects = _listOfPausableObjects.concat(slider);
 						break;
 					
 					case CONST.UP_STABBER:
 						stabber = new Stabber(obj.m_iX, obj.m_iY, CONST.TOP);
 						add(stabber);
+						_listOfPausableObjects = _listOfPausableObjects.concat(stabber);
 						break;
 					
 					case CONST.DOWN_STABBER:
 						stabber = new Stabber(obj.m_iX, obj.m_iY, CONST.BOTTOM);
 						add(stabber);
+						_listOfPausableObjects = _listOfPausableObjects.concat(stabber);
 						break;
 					
 					case CONST.BUTTON_BLOCK:
@@ -216,6 +257,7 @@ package worlds
 					case CONST.MOVING_BLOCK:
 						mblock = new MovingBlock(obj.m_iX, obj.m_iY);
 						add(mblock);
+						_listOfPausableObjects = _listOfPausableObjects.concat(mblock);
 						break;
 					
 					case CONST.ENDFLAG:

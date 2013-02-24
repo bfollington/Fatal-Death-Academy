@@ -7,7 +7,7 @@ package actors
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	
-	public class BasicObject extends Entity
+	public class BasicObject extends ExtEntity
 	{
 		//Movement toggle
 		public var freezeMovement:Boolean = false;
@@ -23,6 +23,8 @@ package actors
 		private var _hitRight:Boolean;
 		private var _hitLeft:Boolean;
 		private var _hitTop:Boolean;
+		
+		private var _paused:Boolean;
 		
 		public function BasicObject()
 		{
@@ -139,24 +141,29 @@ package actors
 		
 		override public function update():void
 		{			
+			
 			super.update();
 			
-			//Handle basic physics
-			if (!freezeMovement) {
-				velocity.x += acceleration.x;
-				velocity.y += acceleration.y;
-				velocity.x /= friction.x;
-				velocity.y /= friction.y;
+			if (!_paused)
+			{
+					
+				//Handle basic physics
+				if (!freezeMovement) {
+					velocity.x += acceleration.x;
+					velocity.y += acceleration.y;
+					velocity.x /= friction.x;
+					velocity.y /= friction.y;
+				}
+				
+				//Check for standing on ground
+				collisionBottom();
+				
+				//Apply velocity to object
+				if (!freezeMovement) moveObject();
+				
+				//Restrict speed to acceptable values
+				clampSpeed();
 			}
-			
-			//Check for standing on ground
-			collisionBottom();
-			
-			//Apply velocity to object
-			if (!freezeMovement) moveObject();
-			
-			//Restrict speed to acceptable values
-			clampSpeed();
 			
 		}
 		
@@ -174,6 +181,21 @@ package actors
 				velocity.y = Math.min(velocity.y, maxSpeed.y);
 			} else {
 				velocity.y = Math.max(velocity.y, maxSpeed.y*-1);
+			}
+		}
+		
+		override public function send_message(msg:String, params:Object=null):void
+		{
+			
+			if (msg == "pause")
+			{
+				_paused = true;
+
+			}
+			
+			if (msg == "unpause")
+			{
+				_paused = false;
 			}
 		}
 

@@ -8,7 +8,7 @@ package actors
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
 	
-	public class MovingBlock extends Entity
+	public class MovingBlock extends ExtEntity
 	{
 		public function MovingBlock(mx:int, my:int)
 		{
@@ -31,9 +31,12 @@ package actors
 		{
 			super.update();
 			
-			y += _yspeed;
+			if (!_paused)
+			{
+				y += _yspeed;
 			
-			_ticker++;
+				_ticker++;
+			}
 			
 			if (_ticker > 60)
 			{
@@ -43,8 +46,22 @@ package actors
 			}
 		}
 		
+		override public function send_message(msg:String, params:Object=null):void
+		{
+			if (msg == "pause")
+			{
+				_paused = true;
+			}
+			
+			if (msg == "unpause")
+			{
+				_paused = false;
+			}
+		}
+		
 		public var Name:String = "MovingBlock";
 		private var _ticker:int = 0;
 		private var _yspeed:int = 1;
+		private var _paused:Boolean = false;
 	}
 }
