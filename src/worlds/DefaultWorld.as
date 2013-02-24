@@ -29,6 +29,7 @@ package worlds
 		private var _level:int;
 		private var _lives:int;
 		public var cam:Camera;
+		private var _temptext:Vector.<Entity>;
 		
 		public function DefaultWorld(Map:Class, level:int, lives:int, soundController:SoundController)
 		{
@@ -104,8 +105,10 @@ package worlds
 			add(e);
 			
 			//If the level is level 1, display the instructional text
-			
-			
+			if (_level == 0) 
+			{
+				_temptext = createTextWithShadowRet("Press space to start the level, and to jump!", 180, 200, 8, true, _temptext);
+			}
 			
 			//Create the fade in transition to begin a level
 			createTransition(true);
@@ -115,6 +118,24 @@ package worlds
 		{
 			
 			super.update();
+			
+			if (_level == 0) 
+			{
+				if (player.x == 551) 
+				{
+					_temptext = createTextWithShadowRet("Hitting spikes will kill you!", 600, 200, 8, true, _temptext);
+				}
+				
+				if (player.x == 751) 
+				{
+					_temptext = createTextWithShadowRet("Actually, anything will kill you...", 600, 200, 8, true, _temptext);
+				}
+				
+				if (player.x == 1701) 
+				{
+					_temptext = createTextWithShadowRet("Except flags, those mark the end of the test.", 600, 200, 8, true, _temptext);
+				}
+			}
 			
 		}
 		

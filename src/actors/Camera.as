@@ -27,7 +27,7 @@ package actors
 			
 			//Scroll the camera to us
 			_x += int((-1*_x + (_target.x - 320/2)) / 2);
-			_y += int(((_target.y - 240/2) - _y) / 10);
+			_y += int(((_target.y - 240/2) - _y) / 30.0);
 			
 			//Update actual camera
 			FP.camera.x = _x + shakeX;
