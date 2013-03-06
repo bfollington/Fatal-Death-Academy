@@ -10,7 +10,7 @@ package
 	
 	import worlds.*;
 	
-	[Frame(factoryClass="Loader")]
+	[Frame(factoryClass="MyPreloader")]
 	public class MacFlash extends Engine
 	{
 		public function MacFlash()
@@ -25,7 +25,7 @@ package
 		
 		override public function init():void
 		{
-			FP.world = new TitleScreen(false, soundController);
+			FP.world = new SponsorState(soundController);
 			trace("World", currentLevel, "created");	
 		}
 		

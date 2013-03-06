@@ -2,6 +2,7 @@ package actors
 {
 	import constants.*;
 	
+	import flash.display.BlendMode;
 	import flash.geom.Point;
 	
 	import net.flashpunk.FP;

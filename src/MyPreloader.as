@@ -8,9 +8,9 @@ package
 	import flash.events.Event;
 	import flash.utils.getDefinitionByName;
 	
-	public class Loader extends MovieClip
+	public class MyPreloader extends MovieClip
 	{
-		public function Loader()
+		public function MyPreloader()
 		{
 			trace("preloader")
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);

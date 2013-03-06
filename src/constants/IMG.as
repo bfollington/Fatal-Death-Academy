@@ -2,6 +2,10 @@ package constants
 {
 	public class IMG
 	{
+		[Embed(source = 'assets/naglogo125x30.png')] public static const SPONSORSMALLLOGO:Class;
+		[Embed(source = 'assets/new_logo.png')] public static const SPONSOROTHERLOGO:Class;
+		[Embed(source = 'assets/moregames.png')] public static const MOREGAMES:Class;
+		
 		[Embed(source = 'assets/tiles2.png')] public static const COLLISION_TILES:Class;
 		[Embed(source = 'assets/SOMETILES.png')] public static const VISUAL_TILES:Class;
 		[Embed(source = 'assets/pinktiles.png')] public static const VISUAL_TILES_PINK:Class;

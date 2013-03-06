@@ -27,6 +27,11 @@ package
 			track1 = new Sfx(MUS1);
 			track2 = new Sfx(MUS2);
 			FP.volume = 1;
+			
+		}
+		
+		public function start():void
+		{
 			track1.play(1, 0);
 		}
 		
